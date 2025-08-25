@@ -17,26 +17,54 @@
 //   });
 
 
+// import app from './app.js';
+// import { db } from './src/db/knex.js';
+// import { config } from './src/config/env.js';
+
+// // Run migrations and seeds
+// (async () => {
+//   try {
+//     await db.migrate.latest({ directory: './migrations' });
+//     await db.seed.run({ directory: './seeds' });
+//     console.log('✅ Database migrated and seeded');
+//   } catch (err) {
+//     console.error('❌ DB migration/seed failed:', err);
+//     process.exit(1);
+//   }
+// })();
+
+// // Start server (for local development)
+// app.listen(config.port, () => {
+//   console.log(`✅ Server running on http://localhost:${config.port}`);
+// });
+
+// // Export app for serverless platforms (like Vercel)
+// export default app;
+
+
+
 import app from './app.js';
 import { db } from './src/db/knex.js';
-import { config } from './src/config/env.js';
+// import { config } from './src/config/env.js';
 
-// Run migrations and seeds
-(async () => {
-  try {
-    await db.migrate.latest({ directory: './migrations' });
-    await db.seed.run({ directory: './seeds' });
-    console.log('✅ Database migrated and seeded');
-  } catch (err) {
-    console.error('❌ DB migration/seed failed:', err);
-    process.exit(1);
-  }
-})();
+// 👉 Only run migrations/seeds in local dev
+if (process.env.NODE_ENV !== 'production') {
+  (async () => {
+    try {
+      await db.migrate.latest({ directory: './migrations' });
+      await db.seed.run({ directory: './seeds' });
+      console.log('✅ Database migrated and seeded');
+    } catch (err) {
+      console.error('❌ DB migration/seed failed:', err);
+      process.exit(1);
+    }
+  })();
 
-// Start server (for local development)
-app.listen(config.port, () => {
-  console.log(`✅ Server running on http://localhost:${config.port}`);
-});
+  // 👉 Only listen locally
+  // app.listen(config.port, () => {
+  //   console.log(`✅ Server running on http://localhost:${config.port}`);
+  // });
+}
 
-// Export app for serverless platforms (like Vercel)
+// 👉 Always export app for Vercel
 export default app;
