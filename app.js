@@ -45,7 +45,7 @@ const app = express();
 
 // ✅ Highlight Change: Setup allowed origins for CORS
 const allowedOrigins = [
-  'http://localhost:5173/',           // Local frontend
+  'http://localhost:5173',           // Local frontend
   'https://your-frontend.vercel.app' // Replace with your deployed frontend URL
 ];
 
