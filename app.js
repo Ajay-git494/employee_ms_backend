@@ -223,7 +223,7 @@ const app = express();
 // ✅ Highlight Change: Allowed origins for frontend requests
 const allowedOrigins = [
   'http://localhost:5173',           // Local frontend
-  'https://your-frontend.vercel.app' // Replace with your deployed frontend URL
+//   'https://your-frontend.vercel.app' // Replace with your deployed frontend URL
 ];
 
 // ✅ Highlight Change: Updated CORS middleware for JWT and preflight handling
