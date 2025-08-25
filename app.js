@@ -145,6 +145,67 @@
 
 
 
+// import express from 'express';
+// import helmet from 'helmet';
+// import cors from 'cors';
+// import cookieParser from 'cookie-parser';
+// import morgan from 'morgan';
+
+// import { notFound, errorHandler } from '../backend/src/middleware/errors.js';
+// import authRoutes from '../backend/src/routes/auth.routes.js';
+// import employeeRoutes from '../backend/src/routes/employees.routes.js';
+// import leaveRoutes from '../backend/src/routes/leaves.routes.js';
+// import salaryRoutes from '../backend/src/routes/salaries.routes.js';
+
+// const app = express();
+
+// // Allowed origins
+// const allowedOrigins = [
+//   'http://localhost:5173',           // Local frontend
+//   'https://your-frontend.vercel.app' // Replace with your deployed frontend URL
+// ];
+
+// // ✅ CORS options for JWT
+// const corsOptions = {
+//   origin: function (origin, callback) {
+//     if (!origin) return callback(null, true); // allow Postman or server-to-server requests
+//     if (allowedOrigins.indexOf(origin) === -1) {
+//       return callback(new Error('Not allowed by CORS'), false);
+//     }
+//     return callback(null, true);
+//   },
+//   methods: ['GET','POST','PUT','DELETE','OPTIONS'], // allow preflight methods
+//   allowedHeaders: ['Content-Type','Authorization'], // allow Authorization header for JWT
+//   credentials: true // allow cookies (optional if using cookies)
+// };
+
+// // Handle preflight requests
+// app.options('*', cors(corsOptions));
+// app.use(cors(corsOptions));
+
+// app.use(helmet());
+// app.use(morgan('dev'));
+// app.use(express.json({ limit: '1mb' }));
+// app.use(cookieParser());
+
+// // ✅ API routes
+// app.use('/api/auth', authRoutes);
+// app.use('/api/employees', employeeRoutes);
+// app.use('/api/leaves', leaveRoutes);
+// app.use('/api/salaries', salaryRoutes);
+
+// // ✅ Error handling
+// app.use(notFound);
+// app.use(errorHandler);
+
+// export default app;
+
+
+
+
+
+
+
 import express from 'express';
 import helmet from 'helmet';
 import cors from 'cors';
@@ -159,13 +220,13 @@ import salaryRoutes from '../backend/src/routes/salaries.routes.js';
 
 const app = express();
 
-// Allowed origins
+// ✅ Highlight Change: Allowed origins for frontend requests
 const allowedOrigins = [
   'http://localhost:5173',           // Local frontend
   'https://your-frontend.vercel.app' // Replace with your deployed frontend URL
 ];
 
-// ✅ CORS options for JWT
+// ✅ Highlight Change: Updated CORS middleware for JWT and preflight handling
 const corsOptions = {
   origin: function (origin, callback) {
     if (!origin) return callback(null, true); // allow Postman or server-to-server requests
@@ -179,7 +240,7 @@ const corsOptions = {
   credentials: true // allow cookies (optional if using cookies)
 };
 
-// Handle preflight requests
+// ✅ Highlight Change: Handle preflight requests globally
 app.options('*', cors(corsOptions));
 app.use(cors(corsOptions));
 
@@ -188,14 +249,15 @@ app.use(morgan('dev'));
 app.use(express.json({ limit: '1mb' }));
 app.use(cookieParser());
 
-// ✅ API routes
+// ✅ Highlight Change: Use routes as usual
 app.use('/api/auth', authRoutes);
 app.use('/api/employees', employeeRoutes);
 app.use('/api/leaves', leaveRoutes);
 app.use('/api/salaries', salaryRoutes);
 
-// ✅ Error handling
+// ✅ Highlight Change: Error handling for Vercel serverless functions
 app.use(notFound);
 app.use(errorHandler);
 
+// ✅ Highlight Change: Export app without app.listen() for serverless platforms like Vercel
 export default app;
