@@ -161,25 +161,25 @@ const app = express();
 
 // Allowed origins
 const allowedOrigins = [
-  'http://localhost:5173',          // Local frontend
-  'https://your-frontend.vercel.app' // Replace with your deployed frontend
+  'http://localhost:5173',           // Local frontend
+  'https://your-frontend.vercel.app' // Replace with your deployed frontend URL
 ];
 
-// CORS options
+// ✅ CORS options for JWT
 const corsOptions = {
-  origin: function(origin, callback) {
-    if (!origin) return callback(null, true); // allow Postman or server-to-server
+  origin: function (origin, callback) {
+    if (!origin) return callback(null, true); // allow Postman or server-to-server requests
     if (allowedOrigins.indexOf(origin) === -1) {
       return callback(new Error('Not allowed by CORS'), false);
     }
     return callback(null, true);
   },
-  methods: ['GET','POST','PUT','DELETE','OPTIONS'], 
-  allowedHeaders: ['Content-Type','Authorization'], // important for JWT
-  credentials: true // allow cookies
+  methods: ['GET','POST','PUT','DELETE','OPTIONS'], // allow preflight methods
+  allowedHeaders: ['Content-Type','Authorization'], // allow Authorization header for JWT
+  credentials: true // allow cookies (optional if using cookies)
 };
 
-// Handle CORS preflight
+// Handle preflight requests
 app.options('*', cors(corsOptions));
 app.use(cors(corsOptions));
 
@@ -188,13 +188,13 @@ app.use(morgan('dev'));
 app.use(express.json({ limit: '1mb' }));
 app.use(cookieParser());
 
-// API routes
+// ✅ API routes
 app.use('/api/auth', authRoutes);
 app.use('/api/employees', employeeRoutes);
 app.use('/api/leaves', leaveRoutes);
 app.use('/api/salaries', salaryRoutes);
 
-// Error handling
+// ✅ Error handling
 app.use(notFound);
 app.use(errorHandler);
 
