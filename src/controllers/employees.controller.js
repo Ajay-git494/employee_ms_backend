@@ -1,4 +1,5 @@
 import { db } from '../db/knex.js';
+
 import { validationResult } from 'express-validator';
 
 export async function listEmployees(req, res, next) {

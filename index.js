@@ -73,7 +73,9 @@
 
 import app from './app.js';
 import { db } from './src/db/knex.js';
+// import { db } from '../backend/src/db/knex.js';
 import { config } from './src/config/env.js';  // ensure this has a port fallback
+// import { config } from '../backend/src/config/env.js';
 
 // 👉 Run migrations/seeds only in local dev
 if (process.env.NODE_ENV !== 'production') {
