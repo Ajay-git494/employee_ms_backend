@@ -4,11 +4,17 @@ import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import morgan from 'morgan';
 
-import { notFound, errorHandler } from '../backend/src/middleware/errors.js';
-import authRoutes from '../backend/src/routes/auth.routes.js';
-import employeeRoutes from '../backend/src/routes/employees.routes.js';
-import leaveRoutes from '../backend/src/routes/leaves.routes.js';
-import salaryRoutes from '../backend/src/routes/salaries.routes.js';
+// import { notFound, errorHandler } from '../backend/src/middleware/errors.js';
+// import authRoutes from '../backend/src/routes/auth.routes.js';
+// import employeeRoutes from '../backend/src/routes/employees.routes.js';
+// import leaveRoutes from '../backend/src/routes/leaves.routes.js';
+// import salaryRoutes from '../backend/src/routes/salaries.routes.js';
+import { notFound, errorHandler } from './src/middleware/errors.js';
+import authRoutes from './src/routes/auth.routes.js';
+import employeeRoutes from './src/routes/employees.routes.js';
+import leaveRoutes from './src/routes/leaves.routes.js';
+import salaryRoutes from './src/routes/salaries.routes.js';
+
 
 const app = express();
 
