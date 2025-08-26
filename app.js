@@ -252,8 +252,8 @@ app.use(cookieParser());
 // ✅ Highlight Change: Use routes as usual
 app.use('/api/auth', authRoutes);
 app.use('/api/employees', employeeRoutes);
-app.use('/api/leaves', leaveRoutes);
-app.use('/api/salaries', salaryRoutes);
+// app.use('/api/leaves', leaveRoutes);
+// app.use('/api/salaries', salaryRoutes);
 
 // ✅ Highlight Change: Error handling for Vercel serverless functions
 app.use(notFound);
