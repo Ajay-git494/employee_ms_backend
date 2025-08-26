@@ -251,7 +251,7 @@ app.use(cookieParser());
 
 // ✅ Highlight Change: Use routes as usual
 app.use('/api/auth', authRoutes);
-app.use('/api/employees', employeeRoutes);
+// app.use('/api/employees', employeeRoutes);
 // app.use('/api/leaves', leaveRoutes);
 // app.use('/api/salaries', salaryRoutes);
 
