@@ -4,7 +4,7 @@ export async function listSalaryHistory(req, res, next) {
   try {
     const employee_id = Number(req.params.employeeId);
 
-    // Get employee info
+    
     const employee = await db('employees')
       .select('id', 'full_name', 'current_salary')
       .where({ id: employee_id })
@@ -12,12 +12,12 @@ export async function listSalaryHistory(req, res, next) {
 
     if (!employee) return res.status(404).json({ error: "Employee not found" });
 
-    // Get salary history (may be empty)
+    
     const salaryHistory = await db('salary_history')
       .where({ employee_id })
       .orderBy('increment_date', 'desc');
 
-    // Return combined response
+    
     res.json({
       employee: {
         id: employee.id,

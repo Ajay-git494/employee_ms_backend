@@ -1,83 +1,7 @@
-// import app from '../backend/app.js';
-// // import { config } from './config/env.js';
-// import { config } from '../backend/src/config/env.js';
-// import { db } from '../backend/src/db/knex.js';
-
-// // Ensure DB is migrated before starting
-// db.migrate.latest({ directory: './migrations' })
-//   .then(() => db.seed.run({ directory: './seeds' }))
-//   .then(() => {
-//     app.listen(config.port, () => {
-//       console.log(`✅ Server running on http://localhost:${config.port}`);
-//     });
-//   })
-//   .catch((err) => {
-//     console.error('❌ Boot failed:', err);
-//     process.exit(1);
-//   });
-
-
-// import app from './app.js';
-// import { db } from './src/db/knex.js';
-// import { config } from './src/config/env.js';
-
-// // Run migrations and seeds
-// (async () => {
-//   try {
-//     await db.migrate.latest({ directory: './migrations' });
-//     await db.seed.run({ directory: './seeds' });
-//     console.log('✅ Database migrated and seeded');
-//   } catch (err) {
-//     console.error('❌ DB migration/seed failed:', err);
-//     process.exit(1);
-//   }
-// })();
-
-// // Start server (for local development)
-// app.listen(config.port, () => {
-//   console.log(`✅ Server running on http://localhost:${config.port}`);
-// });
-
-// // Export app for serverless platforms (like Vercel)
-// export default app;
-
-
-
-// import app from './app.js';
-// import { db } from './src/db/knex.js';
-// // import { config } from './src/config/env.js';
-
-// // 👉 Only run migrations/seeds in local dev
-// if (process.env.NODE_ENV !== 'production') {
-//   (async () => {
-//     try {
-//       await db.migrate.latest({ directory: './migrations' });
-//       await db.seed.run({ directory: './seeds' });
-//       console.log('✅ Database migrated and seeded');
-//     } catch (err) {
-//       console.error('❌ DB migration/seed failed:', err);
-//       process.exit(1);
-//     }
-//   })();
-
-//   // 👉 Only listen locally
-//   app.listen(config.port, () => {
-//     console.log(`✅ Server running on http://localhost:${config.port}`);
-//   });
-// }
-
-// // 👉 Always export app for Vercel
-// export default app;
-
-
-
 import app from './app.js';
 import { db } from './src/db/knex.js';
-// import { db } from '../backend/src/db/knex.js';
-import { config } from './src/config/env.js';  // ensure this has a port fallback
-// import { config } from '../backend/src/config/env.js';
+import { config } from './src/config/env.js';  
 
-// 👉 Run migrations/seeds only in local dev
 if (process.env.NODE_ENV !== 'production') {
   (async () => {
     try {
@@ -91,12 +15,11 @@ if (process.env.NODE_ENV !== 'production') {
   })();
 }
 
-// 👉 Always start server (dev + production)
+
 const PORT = process.env.PORT || config.port || 4000;
 app.listen(PORT, () => {
   console.log(`🚀 Server running on port ${PORT}`);
 });
 
-// 👉 Export app for Vercel/serverless use
 export default app;
 

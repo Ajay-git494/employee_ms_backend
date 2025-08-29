@@ -1,10 +1,3 @@
-// import { body } from 'express-validator';
-
-// export const loginRules = [
-//   body('username').trim().notEmpty(),
-//   body('password').notEmpty()
-// ];
-// validators/auth.validators.js
 import { body, validationResult } from 'express-validator';
 
 export const loginRules = [

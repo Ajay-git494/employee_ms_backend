@@ -22,13 +22,13 @@ export async function createEmployee(req, res, next) {
 
     const payload = req.body;
 
-    // ✅ Check if email already exists
+    
     const existing = await db('employees').where({ email: payload.email }).first();
     if (existing) {
       return res.status(400).json({ error: "Email already exists, please use another email." });
     }
 
-    // ✅ Insert employee
+    
     const [id] = await db('employees').insert(payload);
     const created = await db('employees').where({ id }).first();
 
@@ -73,12 +73,12 @@ export async function getEmployeeByIdWithColumns(req, res, next) {
     const id = Number(req.params.id);
     if (isNaN(id)) return res.status(400).json({ error: "Invalid employee ID" });
 
-    // fetch single employee
+    
     const employee = await db('employees').where({ id }).first();
     if (!employee) return res.status(404).json({ error: "Employee not found" });
-    // fetch column metadata
+    
     const columns = await db.raw(`SHOW COLUMNS FROM employees`);
-    // map column name + value
+    
     const result = columns[0].map(col => ({
       column: col.Field,
       value: employee[col.Field] ?? null
